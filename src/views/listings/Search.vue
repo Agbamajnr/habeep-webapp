@@ -1,29 +1,93 @@
 <template>
-    <div class="w-screen min-w-full flex flex-col items-center bg-white h-full min-h-screen overflow-y-auto">
-        <HomeNavbar />
+    <div class="w-screen min-w-full flex flex-col items-center bg-white h-full min-h-screen overflow-y-auto"
+        resize="changeWidth">
+        <MainNavbar v-if="(screenWidth > 767)" />
 
-        <div class="body px-6 2xl:px-44 md:px-20 w-full flex flex-col h-fit items-start gap-y-8 mt-3">
+        <div class="flex flex-row items-center justify-between w-full px-6 2xl:px-44 md:px-20 my-4" v-else>
+            <div class="flex flex-row items-center gap-x-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="#0A1045" class="w-6 h-6 cursor-pointer" @click="$router.go(-1)">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                </svg>
+                <span class="text-xl text-webapp font-medium">Search Results</span>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0A1045"
+                class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+
+        </div>
+
+        <div
+            class="body px-6 2xl:px-44 md:px-20 mb-10 w-full flex flex-col h-fit items-center md:items-start gap-y-8 mt-3">
             <div class="flex flex-row w-full items-center justify-between">
-                <p class="text-webapp text-lg w-full"><span class="text-primary font-medium">12</span> ads result found
+                <p class="text-webapp text-lg w-full md:block hidden"><span class="text-primary font-medium">12</span>
+                    ads result found
                     in Calabar</p>
 
                 <!-- filters -->
-                <div class="flex flex-row items-center w-1/2 h-fit gap-x-4">
-                    <div
+                <div class="flex flex-row items-center h-fit gap-x-4 relative transition-all">
+                    <div @click="toggleDropdown('sort')"
                         class="border border-gray-300 py-2 px-3 flex flex-row items-center gap-x-2 rounded-full cursor-pointer">
-                        <span class="text-lg text-sub-webapp">Sort: Recommended</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="#9A9A9D" class="w-6 h-6">
+                        <span class="md:text-lg text-webapp text-sm flex flex-row gap-x-1"> <span
+                                class="hidden md:block">Sort: </span>
+                            Recommended</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': onSortDropdown }" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="#9A9A9D" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
                     </div>
-                    <div
-                        class="border border-gray-300 py-2 px-3 flex flex-row items-center gap-x-2 rounded-full cursor-pointer">
-                        <span class="text-lg text-sub-webapp">Calabar</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="#9A9A9D" class="w-6 h-6">
+
+                    <div @click="toggleDropdown('location')"
+                        class="border border-gray-300 py-2 px-3 flex flex-row items-center gap-x-4 rounded-full cursor-pointer">
+                        <span class="md:text-lg text-webapp">Calabar</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': onLocationDropdown }" fill="none"
+                            viewBox="0 0 24 24" stroke-width="1.5" stroke="#9A9A9D" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                         </svg>
+                    </div>
+
+                    <!-- sort dropdown -->
+                    <div v-if="(onSortDropdown && onDropdown)"
+                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16"
+                        style="width: 220px">
+                        <div class="flex flex-row items-center justify-between">
+                            <span class="text-sm font-medium">Sort by</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" @click="toggleDropdown('sort')" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="#71759D" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Recommended</p>
+                        <hr>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Newest first</p>
+                        <hr>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Oldest first</p>
+
+
+                    </div>
+
+                    <!-- location dropdown -->
+                    <div v-if="(onLocationDropdown && onDropdown)"
+                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16 right-0"
+                        style="width: 220px">
+                        <div class="flex flex-row items-center justify-between">
+                            <span class="text-sm font-medium">Location- state</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" @click="toggleDropdown('location')" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="#71759D" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Abuja</p>
+                        <hr>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Adamawa</p>
+                        <hr>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer">Akwa Ibom</p>
+
+
                     </div>
                 </div>
 
@@ -34,7 +98,7 @@
 
                 <!-- listing template -->
                 <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 6" :key="item">
-                    <div class="flex flex-col items-start gap-y-2 border rounded-lg border-gray-200 pb-2">
+                    <div class="flex flex-col items-start gap-y-2 relative border rounded-lg border-gray-200 pb-2">
                         <img src="../../assets/images/house-img.svg" alt="" class="w-full h-full">
                         <p class="text-webapp text-xl font-medium w-full mx-3">4 bedroom apartment at atimbo </p>
 
@@ -52,49 +116,58 @@
                             </svg>
 
                         </div>
+
+                        <div class="rounded border border-white px-2 py-1 absolute top-5 right-5">
+                            <span class="text-white text-sm text-center">1.8km Away</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- anima -->
-            <div
-                class="download-app-animation sm:w-5/6 w-full md:w-3/5 self-center xl:w-3/4 border-2 p-4  rounded xl:relative border-gray-300 h-fit xl:p-8 2xl:p-16 mt-24 md:mt-32 xl:mt-48">
-                <div class="flex flex-col items-center xl:items-start gap-y-4 xl:gap-y-3 xl:w-1/2">
-                    <p
-                        class="text-webapp text-2xl md:text-3xl  xl:text-4xl font-bold xl:w-full w-full md:w-5/6 text-left md:text-center xl:text-left">
-                        House search in just a click</p>
-                    <p
-                        class="text-sub-webapp text-sm  md:text-lg xl:w-full w-full md:w-4/6 text-left md:text-center xl:text-left">
-                        Get the app on any device you use on apple
-                        store or google playstore</p>
-                    <!-- download stores -->
-                    <div class="flex flex-row gap-x-2 items-center w-fit mt-4">
-                        <img src="../../assets/images/apple-download.svg" alt="">
-                        <img src="../../assets/images/android-download.svg" alt="">
-                    </div>
-                </div>
-
-                <!-- phone anime -->
-                <img src="../../assets/images/phone-blog-anime.svg"
-                    class="hidden xl:block w-full  2xl:w-4/5 absolute -top-3/4 2xl:-bottom-full xl:-right-36 2xl:-right-24"
-                    alt="">
-
-            </div>
-        </div>
-
-        <div class="flex flex-row md:mb-16 mb-12 items-center gap-x-4 mt-36 md:mt-52 xl:mt-64 z-20">
-            <router-link to="/terms-of-service" class="underline text-webapp">Terms of service</router-link>
-            <router-link to="/products" class="underline text-webapp">Products</router-link>
-            <router-link to="/help" class="underline text-webapp">Help</router-link>
         </div>
     </div>
 </template>
 
 <script setup>
-import HomeNavbar from '../../components/HomeNavbar.vue'
+import { ref } from 'vue'
 
+import MainNavbar from '../../components/MainNavbar.vue'
+
+// ui conditionals
+const onSortDropdown = ref(false)
+const onLocationDropdown = ref(false)
+const onDropdown = ref(false)
+
+function toggleDropdown(type) {
+    if (type == 'location') {
+        onSortDropdown.value = false
+        if (onLocationDropdown.value === false) {
+            onDropdown.value = true
+            onLocationDropdown.value = true
+        } else {
+            onLocationDropdown.value = false
+
+        }
+    }
+    if (type == 'sort') {
+        onLocationDropdown.value = false
+        if (onSortDropdown.value === false) {
+            onDropdown.value = true
+            // onLocationDropdown.value = !onLocationDropdown.value
+            onSortDropdown.value = true
+        } else {
+            onSortDropdown.value = false
+        }
+    }
+}
+
+const screenWidth = ref(window.innerWidth)
+
+function changeWidth() {
+    screenWidth.value = window.innerWidth
+}
 </script>
 
-<style>
+<style >
 
 </style>

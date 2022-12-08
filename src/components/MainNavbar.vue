@@ -1,9 +1,21 @@
 <template>
     <!-- Header / Navbar -->
-    <div class="flex flex-row items-center py-4 justify-between w-full px-6 2xl:px-44 md:px-20 border-b border-b-textfieldbg">
+    <div
+        class="flex flex-row items-center relative py-4 justify-between w-full px-6 2xl:px-44 md:px-20 border-b border-b-textfieldbg">
         <div class="logo flex flex-row items-center gap-x-2">
             <img src="../assets/icons/logo.svg" alt="Logo">
             <span class="text-primary text-2xl">Habeep</span>
+        </div>
+
+        <div
+            class="search-bar lg:flex hidden w-1/4 flex-row rounded-full border border-gray-300 items-center bg-white pl-3 pr-1 h-12 py-1 gap-x-4">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#B1B4CD"
+                class="w-4 h-4 mt-1">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+
+            <input type="text" class="w-full h-full" placeholder="Search">
         </div>
 
         <div class=" flex-row items-center w-fit gap-x-6 divide-x md:flex hidden">
@@ -16,9 +28,9 @@
 
             <div class="flex flex-row gap-x-10 items-start md:items-center pl-6">
                 <span class="uppercase text-lg text-webapp">BLOG</span>
-                <div class="flex flex-row items-center gap-x-2">
+                <div class="flex flex-row items-center cursor-pointer gap-x-2" @click="toggleNav">
                     <img src="../assets/icons/user.svg" alt="">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': onNavDropdown}" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="#0A1045" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                     </svg>
@@ -26,10 +38,52 @@
             </div>
         </div>
 
-        <img src="../assets/icons/mobile-nav.svg" class="flex md:hidden" alt="">
+        <img src="../assets/icons/mobile-nav.svg" @click="($emit('changeNav') && toggleNav)" class="flex md:hidden" alt="">
+
+        <!-- Navigation Menu -->
+
+        <div
+            v-if="onNavDropdown"
+            class="flex flex-col drop-shadow-lg shadow-xl bg-white rounded-xl gap-y-3 border p-6 border-gray-300 absolute top-16 right-20 z-10"
+            style="width: 250px">
+
+            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Home'}">Home</p>
+            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Listings-search'}">Search</p>
+            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Messages'}">Message</p>
+            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Account'}">Account</p>
+            <hr class="my-1">
+            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Wallet'}">Wallet</p>
+
+            <div class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300">
+                <img src="../assets/icons/logo-mini.svg" alt="">
+                <span class="text-lg text-webapp">Login</span>
+                <span></span>
+            </div>
+
+
+
+
+        </div>
     </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
 
+const onNavDropdown = ref(false)
+
+function toggleNav() {
+    onNavDropdown.value = !onNavDropdown.value
+}
 </script>
+
+<style scoped>
+input::placeholder {
+    color: #B1B4CD;
+    font-size: 16px;
+}
+
+input {
+    outline: none;
+}
+</style>

@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 // pages
 import Home from '../views/Home.vue'
+
+// listings
 import ListingSearch from '../views/listings/Search.vue'
+import ListingProduct from '../views/listings/Product.vue'
 
 // extras
 import Blog from '../views/extras/BlogRoom.vue'
@@ -28,6 +31,11 @@ const routes = [
         path: '/listings/search',
         name: 'Listings-search',
         component: ListingSearch
+    },
+    {
+        path: '/listings/products/:id',
+        name: 'Listings-product',
+        component: ListingProduct
     },
 ]
 

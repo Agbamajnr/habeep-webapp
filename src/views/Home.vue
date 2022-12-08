@@ -1,14 +1,16 @@
 <template>
   <div class="w-screen min-w-full flex flex-col justify-between items-center bg-white h-full min-h-screen overflow-y-none">
     <!-- Header / Navbar -->
-    <HomeNavbar />
+    <HomeNavbar @changeNav="" />
+
+    
     
     <!-- Hero/Quick search -->
     <div class="flex flex-col items-center gap-y-12 md:pb-0 pb-16">
       <p class="hero-text md:text-5xl text-4xl xl:text-6xl text-center text-webapp font-medium sm:4/5 w-5/6 md:w-3/5">Quick way to Find your dream Property</p>
 
       <!-- Quick search -->
-      <div class="flex flex-col relative quick-search no-wrap">
+      <div class="flex flex-col quick-search no-wrap">
         <!-- Search bar -->
         <div class="search-bar w-full flex flex-row items-center bg-white pl-3 pr-1 h-12 py-1 gap-x-4">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#B1B4CD"
@@ -42,14 +44,14 @@
     </div>
 
     <!-- iLLUSTRATIONS ?  Footer-->
-    <div class="flex flex-row items-end md:justify-between justify-center  w-full z-0">
-      <img src="../assets/illustrations/home-left.svg" class="md:flex hidden"  alt="">
+    <div class="flex flex-row items-end xl:justify-between justify-center  w-full z-0">
+      <img src="../assets/illustrations/home-left.svg" class="xl:flex hidden"  alt="">
       <div class="flex flex-row md:mb-10 mb-4 items-center gap-x-4">
         <router-link to="/terms-of-service" class="underline text-webapp">Terms of service</router-link>
         <router-link to="/products" class="underline text-webapp">Products</router-link>
         <router-link to="/help" class="underline text-webapp">Help</router-link>
       </div>
-      <img src="../assets/illustrations/home-right.svg" class="md:flex hidden" alt="">
+      <img src="../assets/illustrations/home-right.svg" class="xl:flex hidden" alt="">
     </div>
   </div>
 </template>
