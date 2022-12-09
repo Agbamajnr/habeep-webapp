@@ -7,6 +7,9 @@ import Home from '../views/Home.vue'
 import ListingSearch from '../views/listings/Search.vue'
 import ListingProduct from '../views/listings/Product.vue'
 
+// agents
+import AgentProfile from '../views/agents/Profile.vue'
+
 // extras
 import Blog from '../views/extras/BlogRoom.vue'
 import TOS from '../views/extras/TermsOfService.vue'
@@ -17,6 +20,7 @@ const routes = [
         name: 'Home',
         component: Home
     },
+    // extras
     {
         path: '/blog',
         name: 'Blog',
@@ -27,6 +31,7 @@ const routes = [
         name: 'Terms-Of-Service',
         component: TOS
     },
+    // listings
     {
         path: '/listings/search',
         name: 'Listings-search',
@@ -37,6 +42,14 @@ const routes = [
         name: 'Listings-product',
         component: ListingProduct
     },
+    // agents
+    {
+        path: '/agents/profile/:id',
+        name: 'Agent-profile',
+        component: AgentProfile
+    },
+
+    
 ]
 
 

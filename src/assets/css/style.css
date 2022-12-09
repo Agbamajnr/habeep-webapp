@@ -1,21 +1,10 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap'); */
+/*  Import Ubuntu font */
+/* @import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
-/* 
 :root {
-  font-family: 'Space Grotesk', sans-serif;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background: #010007;
-  scroll-behavior: smooth;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
+  font-family: 'Ubuntu', sans-serif;
+} */
+/*  
 @media (prefers-color-scheme: dark) {
   :root {
     color: #213547;
@@ -37,6 +26,9 @@
 }
 .text-sub-webapp {
   color: #4E527B;
+}
+.bg-webapp {
+  background: #0A1045;
 }
 .text-webapp {
   color: #0A1045;

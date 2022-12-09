@@ -97,7 +97,7 @@
             <div class="flex flex-row flex-auto mt-6  md:mt-10 w-full h-fit  flex-wrap">
 
                 <!-- listing template -->
-                <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 6" :key="item">
+                <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 6" :key="item" @click="$router.push('/listings/products/' + item)">
                     <div class="flex flex-col items-start gap-y-2 relative border rounded-lg border-gray-200 pb-2">
                         <img src="../../assets/images/house-img.svg" alt="" class="w-full h-full">
                         <p class="text-webapp text-xl font-medium w-full mx-3">4 bedroom apartment at atimbo </p>
