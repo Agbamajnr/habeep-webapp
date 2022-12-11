@@ -24,15 +24,15 @@
             <div class="flex flex-row w-full items-center justify-between">
                 <p class="text-webapp text-lg w-full md:block hidden"><span class="text-primary font-medium">12</span>
                     ads result found
-                    in Calabar</p>
+                    in <span class="font-medium capitalize">{{$route.query.location ? $route.query.location : 'Nigeria'}}</span></p>
 
                 <!-- filters -->
                 <div class="flex flex-row items-center h-fit gap-x-4 relative transition-all">
                     <div @click="toggleDropdown('sort')"
-                        class="border border-gray-300 py-2 px-3 flex flex-row items-center gap-x-2 rounded-full cursor-pointer">
-                        <span class="md:text-lg text-webapp text-sm flex flex-row gap-x-1"> <span
-                                class="hidden md:block">Sort: </span>
-                            Recommended</span>
+                        class="border border-gray-300 w-56 py-2 justify-center flex flex-row items-center gap-x-2 rounded-full cursor-pointer ">
+                        <span class="md:text-lg text-webapp text-sm flex flex-row gap-x-1"> Sort:
+                            <span class="hidden md:flex flex-row items-center w-full flex-nowrap">{{sortValue}}</span>
+                        </span>
                         <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': onSortDropdown }" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#9A9A9D" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -50,7 +50,7 @@
 
                     <!-- sort dropdown -->
                     <div v-if="(onSortDropdown && onDropdown)"
-                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16"
+                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16 z-10"
                         style="width: 220px">
                         <div class="flex flex-row items-center justify-between">
                             <span class="text-sm font-medium">Sort by</span>
@@ -60,18 +60,18 @@
                             </svg>
                         </div>
 
-                        <p class="text-sm text-webapp mt-2 cursor-pointer">Recommended</p>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer" @click="changeSortValue(1)">Recommended</p>
                         <hr>
-                        <p class="text-sm text-webapp mt-2 cursor-pointer">Newest first</p>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer" @click="changeSortValue(2)">Newest first</p>
                         <hr>
-                        <p class="text-sm text-webapp mt-2 cursor-pointer">Oldest first</p>
+                        <p class="text-sm text-webapp mt-2 cursor-pointer" @click="changeSortValue(3)">Oldest first</p>
 
 
                     </div>
 
                     <!-- location dropdown -->
                     <div v-if="(onLocationDropdown && onDropdown)"
-                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16 right-0"
+                        class="flex flex-col drop-shadow-md shadow-xl bg-white rounded-xl gap-y-3 border p-4 border-gray-300 absolute top-16 right-0 z-10"
                         style="width: 220px">
                         <div class="flex flex-row items-center justify-between">
                             <span class="text-sm font-medium">Location- state</span>
@@ -137,6 +137,10 @@ import MainNavbar from '../../components/MainNavbar.vue'
 const onSortDropdown = ref(false)
 const onLocationDropdown = ref(false)
 const onDropdown = ref(false)
+const locationValue = ref(false)
+
+// filters
+const sortValue = ref('Recommended')
 
 function toggleDropdown(type) {
     if (type == 'location') {
@@ -159,6 +163,23 @@ function toggleDropdown(type) {
             onSortDropdown.value = false
         }
     }
+}
+
+function changeSortValue(index) {
+    if(index == 1) {
+        sortValue.value = 'Recommended'
+    } else if(index == 2) {
+        sortValue.value = 'Newest First'
+    } else {
+        sortValue.value = 'Oldest First'
+    }
+
+    toggleDropdown('sort')
+}
+function changeLocationValue(place) {
+    locationValue.value  = place
+
+    toggleDropdown('locatiom')
 }
 
 const screenWidth = ref(window.innerWidth)

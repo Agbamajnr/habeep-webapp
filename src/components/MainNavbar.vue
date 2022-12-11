@@ -1,21 +1,24 @@
 <template>
     <!-- Header / Navbar -->
+    <div class="absolute w-screen h-screen top-0 opacity-50" v-if="onMobileNav" style="background: #161622"></div>
+
     <div
+        
         class="flex flex-row items-center relative py-4 justify-between w-full px-6 2xl:px-44 md:px-20 border-b border-b-textfieldbg">
-        <div class="logo flex flex-row items-center gap-x-2">
+        <div class="logo flex flex-row items-center gap-x-2 cursor-pointer" @click="$router.push('/')">
             <img src="../assets/icons/logo.svg" alt="Logo">
             <span class="text-primary text-2xl">Habeep</span>
         </div>
 
         <div
-            class="search-bar lg:flex hidden w-1/4 flex-row rounded-full border border-gray-300 items-center bg-white pl-3 pr-1 h-12 py-1 gap-x-4">
+            class="search-bar lg:flex hidden w-1/4 flex-row rounded-full border border-gray-300 items-center  pl-3 pr-1 h-12 py-1 gap-x-4">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#B1B4CD"
                 class="w-4 h-4 mt-1">
                 <path stroke-linecap="round" stroke-linejoin="round"
                     d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
             </svg>
 
-            <input type="text" class="w-full h-full" placeholder="Search">
+            <input type="text" class="w-full h-full bg-transparent" placeholder="Search">
         </div>
 
         <div class=" flex-row items-center w-fit gap-x-6 divide-x md:flex hidden">
@@ -38,12 +41,13 @@
             </div>
         </div>
 
-        <img src="../assets/icons/mobile-nav.svg" @click="($emit('changeNav') && toggleNav)" class="flex md:hidden" alt="">
+        <img src="../assets/icons/mobile-nav.svg" @click="toggleMobileNav" class="flex md:hidden" alt="">
 
         <!-- Navigation Menu -->
 
         <div
-            v-if="onNavDropdown"
+            v-if="(onNavDropdown || onMobileNav)"
+            :class="{'right-2 top-20': onMobileNav}"
             class="flex flex-col drop-shadow-lg shadow-xl bg-white rounded-xl gap-y-3 border p-6 border-gray-300 absolute top-16 right-20 z-10"
             style="width: 250px">
 
@@ -71,9 +75,13 @@
 import { ref } from 'vue'
 
 const onNavDropdown = ref(false)
+const onMobileNav = ref(false)
 
 function toggleNav() {
     onNavDropdown.value = !onNavDropdown.value
+}
+function toggleMobileNav() {
+    onMobileNav.value = !onMobileNav.value
 }
 </script>
 

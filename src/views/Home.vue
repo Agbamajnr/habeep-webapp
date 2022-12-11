@@ -1,7 +1,7 @@
 <template>
   <div class="w-screen min-w-full flex flex-col justify-between items-center bg-white h-full min-h-screen overflow-y-none">
     <!-- Header / Navbar -->
-    <HomeNavbar @changeNav="" />
+    <HomeNavbar />
 
     
     
@@ -10,7 +10,7 @@
       <p class="hero-text md:text-5xl text-4xl xl:text-6xl text-center text-webapp font-medium sm:4/5 w-5/6 md:w-3/5">Quick way to Find your dream Property</p>
 
       <!-- Quick search -->
-      <div class="flex flex-col quick-search no-wrap">
+      <div class="flex flex-col quick-search no-wrap relative">
         <!-- Search bar -->
         <div class="search-bar w-full flex flex-row items-center bg-white pl-3 pr-1 h-12 py-1 gap-x-4">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="#B1B4CD"
@@ -23,7 +23,7 @@
         </div>
         <!-- search results -->
         <div class="flex flex-col gap-y-4 search-results relative sm:absolute bg-white z-10 w-full py-5 px-3 top-12 md:top-20" v-if="(data.input.length > 0)">
-          <div class="flex flex-row items-center result justify-between w-full cursor-pointer" @click="$router.push('/listings/search?query=' + data.input)">
+          <div class="flex flex-row items-center result justify-between w-full cursor-pointer" @click="$router.push('/listings/search?name=' + data.input)">
             <p class="text-webapp text-lg">{{data.input}}</p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#71759D"
               class="w-6 h-6 cursor-pointer">
@@ -32,8 +32,8 @@
           </div>
 
           <!-- Based on Search bar Input results -->
-          <div class="flex flex-row items-center result justify-between w-full cursor-pointer" v-for="result in results.slice(0, 5)" :key="result" @click="$router.push('/search?query=' + result)">
-            <p class="text-webapp text-lg">{{result}}</p>
+          <div class="flex flex-row items-center result justify-between w-full cursor-pointer" v-for="location in locations.slice(0, 5)" :key="location" @click="$router.push('/listings/search?name=' + data.input + '&location=' + location.toLowerCase())">
+            <p class="text-webapp text-lg font-medium gap-x-1 flex flex-row items-center">{{data.input}} <span class="text-lg font-extralight text-sub-webapp">in</span> <span class="text-lg font-medium text-webapp">{{location}}</span></p>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="#71759D"
               class="w-6 h-6 cursor-pointer">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
@@ -48,7 +48,7 @@
       <img src="../assets/illustrations/home-left.svg" class="xl:flex hidden"  alt="">
       <div class="flex flex-row md:mb-10 mb-4 items-center gap-x-4">
         <router-link to="/terms-of-service" class="underline text-webapp">Terms of service</router-link>
-        <router-link to="/products" class="underline text-webapp">Products</router-link>
+        <router-link to="/listings/search?name=Houses" class="underline text-webapp">Products</router-link>
         <router-link to="/help" class="underline text-webapp">Help</router-link>
       </div>
       <img src="../assets/illustrations/home-right.svg" class="xl:flex hidden" alt="">
@@ -68,14 +68,14 @@ const data = reactive({
   input: ''
 })
 
-const results = ref([
-  'hello',
-  'hello',
-  'hello',
-  'hello',
-  'hello',
-  'hello',
-  'hello',
+const locations = ref([
+  'Calabar',
+  'Lagos',
+  'Enugu',
+  'Abuja',
+  'Ikom',
+  'Kano',
+  'Onitsha, Anambra',
 ])
 </script>
 

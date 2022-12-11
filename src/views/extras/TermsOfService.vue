@@ -43,7 +43,7 @@
 
         <div class="flex flex-row mt-10 md:mb-16 mb-12 items-center gap-x-4">
             <router-link to="/terms-of-service" class="underline text-primary font-semibold">Terms of service</router-link>
-            <router-link to="/products" class="underline text-webapp">Products</router-link>
+            <router-link to="/listings/search?name=Houses" class="underline text-webapp">Products</router-link>
             <router-link to="/help" class="underline text-webapp">Help</router-link>
         </div>
     </div>
