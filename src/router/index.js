@@ -10,6 +10,9 @@ import ListingProduct from '../views/listings/Product.vue'
 // agents
 import AgentProfile from '../views/agents/Profile.vue'
 
+// chats
+import ChatIndex from '../views/chats/Index.vue'
+
 // extras
 import Blog from '../views/extras/BlogRoom.vue'
 import TOS from '../views/extras/TermsOfService.vue'
@@ -48,6 +51,13 @@ const routes = [
         name: 'Agent-profile',
         component: AgentProfile
     },
+    // chats
+    {
+        path: '/chats',
+        name: 'Chat',
+        component: ChatIndex
+    },
+
 
     
 ]
