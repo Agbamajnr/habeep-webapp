@@ -1,14 +1,14 @@
 <template>
     <div class="absolute w-screen h-screen min-h-full top-0 opacity-50" v-if="onModal" style="background: #161622"></div>
-
+    
     <div class="w-screen min-w-full flex flex-row items-center bg-white h-screen min-h-full overflow-hidden">
-        <img src="../../assets/images/habeep-show.png" class="w-1/3 h-full" alt="">
+        <img src="../../assets/images/habeep-show.png" class="w-1/3 xl:block hidden h-full" alt="">
+        
+        <div :class="{'relative': screenWidth < 768}" class="form-container flex flex-col items-center bg-white gap-y-3 w-full xl:w-2/3 h-full pb-6 md:py-10 overflow-y-auto overflow-x-hidden">
 
-        <div class="form-container flex flex-col items-center bg-white gap-y-3 w-2/3 h-full py-10 overflow-y-auto overflow-x-hidden">
-
-            <div class="flex flex-col items-center w-2/3">
+            <div class="flex flex-col items-center w-full md:w-2/3 px-4">
                 <!-- logo -->
-                <div class="logo flex flex-row items-center justify-end w-full gap-x-2 cursor-pointer"
+                <div class="logo md:flex hidden flex-row items-center justify-end w-full gap-x-2 cursor-pointer"
                     @click="$router.push('/')">
                     <img src="../../assets/icons/logo.svg" alt="Logo">
                     <span class="text-primary text-2xl">Habeep</span>
@@ -49,12 +49,12 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center w-full justify-between">
-                    <div class="flex flex-col items-start w-5/12 gap-y-1 mt-8">
+                <div class="flex flex-col xs:flex-row items-center w-full justify-between">
+                    <div class="flex flex-col items-start w-full xs:w-5/12 gap-y-1 mt-8">
                         <label for="" class="text-sm text-webapp">Create a secure pin</label>
                         <input type="number" placeholder="Enter a 4 digit pin" class="w-full  h-14 rounded-lg">
                     </div>
-                    <div class="flex flex-col items-start w-5/12 gap-y-1 mt-8">
+                    <div class="flex flex-col items-start  w-full xs:w-5/12 gap-y-1 mt-8">
                         <label for="" class="text-sm text-webapp">Refferal code(optional)</label>
                         <input type="number" placeholder="Enter a refferal code" class="w-full  h-14 rounded-lg">
                     </div>
@@ -72,7 +72,8 @@
 
             </div>
 
-            <SuggestedCategory v-if="onSuggestedListingsModal && onModal" />
+            <SuggestedCategory @enterAgents="gotoModal('agents')" v-if="onSuggestedListingsModal && onModal" />
+            <SuggestedAgents v-if="onSuggestedFollowersModal && onModal" />
         </div>
     </div>
 </template>
@@ -81,6 +82,10 @@
 import { ref } from 'vue'
 
 import SuggestedCategory from './components/SuggestedCategory.vue'
+import SuggestedAgents from './components/SuggestedAgents.vue'
+
+const screenWidth = ref(window.innerWidth)
+
 
 const onModal = ref(false)
 const onSuggestedListingsModal = ref(false)
@@ -92,7 +97,7 @@ function gotoModal(modal) {
         onSuggestedListingsModal.value = true
         onSuggestedFollowersModal.value = false
     }
-    if(modal === 'followers') {
+    if(modal === 'agents') {
         onSuggestedListingsModal.value = false
         onSuggestedFollowersModal.value = true
     }

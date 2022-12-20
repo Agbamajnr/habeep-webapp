@@ -29,13 +29,13 @@
                 class="agent-info flex p-4 bg-white flex-col border border-gray-300 rounded w-full lg:w-2/6 2xl:w-1/4 items-start lg:ml-3 h-fit">
                 <div class="flex flex-row gap-x-3 items-start">
                     <div class="rounded-full w-24 h-24 grid place-items-center">
-                        <img src="../../assets/icons/model.svg" class="w-full h-full" alt="">
+                        <img src="../../../assets/icons/model.svg" class="w-full h-full" alt="">
                     </div>
                     <div class="flex flex-col ">
                         <span class="text-xl md:text-center text-left agent-name text-webapp font-medium">Duke
                             Carrick</span>
                         <p class="text-lg agent-ads-count text-sub-webapp flex flex-row gap-x-2 items-center"><img
-                                src="../../assets/images/map-pin.png" alt="">Calabar</p>
+                                src="../../../assets/images/map-pin.png" alt="">Calabar</p>
                     </div>
                 </div>
 
@@ -87,12 +87,12 @@
                         <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 6" :key="item">
                             <div
                                 class="flex flex-col items-start gap-y-2 relative border rounded-lg border-gray-200 pb-2">
-                                <img src="../../assets/images/house-img.svg" alt="" class="w-full h-full">
+                                <img src="../../../assets/images/house-img.svg" alt="" class="w-full h-full">
                                 <p class="text-webapp text-xl font-medium w-full mx-3">4 bedroom apartment at atimbo
                                 </p>
 
                                 <div class="location flex flex-row items-center gap-x-2 px-3">
-                                    <img src="../../assets/images/map-pin.png" alt="">
+                                    <img src="../../../assets/images/map-pin.png" alt="">
                                     <span class="text-sm text-webapp">Calabar</span>
                                 </div>
 
@@ -120,12 +120,12 @@
                         <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 3" :key="item">
                             <div
                                 class="flex flex-col items-start gap-y-2 relative border rounded-lg border-gray-200 pb-2">
-                                <img src="../../assets/images/house-img.svg" alt="" class="w-full h-full">
+                                <img src="../../../assets/images/house-img.svg" alt="" class="w-full h-full">
                                 <p class="text-webapp text-xl font-medium w-full mx-3">4 bedroom apartment at atimbo
                                 </p>
 
                                 <div class="location flex flex-row items-center gap-x-2 px-3">
-                                    <img src="../../assets/images/map-pin.png" alt="">
+                                    <img src="../../../assets/images/map-pin.png" alt="">
                                     <span class="text-sm text-webapp">Calabar</span>
                                 </div>
 
@@ -158,8 +158,8 @@ import { ref } from 'vue'
 import gsap from 'gsap'
 
 
-import MainNavbar from '../../components/MainNavbar.vue'
-import Following from '../agents/components/modal/Following.vue'
+import MainNavbar from '../../../components/MainNavbar.vue'
+import Following from './components/modal/Following.vue'
 
 const openTab = ref(1)
 const onModal = ref(false)

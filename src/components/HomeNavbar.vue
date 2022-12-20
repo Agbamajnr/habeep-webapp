@@ -1,6 +1,6 @@
 <template>
     <!-- Header / Navbar -->
-    <div class="absolute w-screen h-screen top-0 opacity-50" v-if="onMobileNav" style="background: #161622"></div>
+    <div class="absolute w-screen h-screen top-0 opacity-50" @click="toggleMobileNav" v-if="onMobileNav" style="background: #161622"></div>
 
     <div
         

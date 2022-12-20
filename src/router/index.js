@@ -7,8 +7,17 @@ import Home from '../views/Home.vue'
 import ListingSearch from '../views/listings/Search.vue'
 import ListingProduct from '../views/listings/Product.vue'
 
+// profile
+// user
+import UserProfile from '../views/profile/user/Profile.vue'
+
 // agents
-import AgentProfile from '../views/agents/Profile.vue'
+import AgentProfile from '../views/profile/agents/Profile.vue'
+
+// IBO
+import IBO_ChooseCategory from '../views/profile/IBO/ChooseCategory.vue'
+
+
 
 // chats
 import ChatIndex from '../views/chats/Index.vue'
@@ -20,6 +29,11 @@ import TOS from '../views/extras/TermsOfService.vue'
 // auth
 import Register from '../views/Auth/Register.vue'
 import Login from '../views/Auth/Login.vue'
+import ForgotPin from '../views/Auth/ForgotPin.vue'
+import ResetPin from '../views/Auth/ResetPin.vue'
+import OTP from '../views/Auth/OTP_Validation.vue'
+
+
 
 const routes = [
     {
@@ -49,12 +63,25 @@ const routes = [
         name: 'Listings-product',
         component: ListingProduct
     },
-    // agents
+    // profile
     {
         path: '/agents/profile/:id',
         name: 'Agent-profile',
         component: AgentProfile
     },
+    {
+        path: '/user/profile/:id',
+        name: 'User-profile',
+        component: UserProfile
+    },
+
+    // IBO
+    {
+        path: '/account/IBO/category',
+        name: 'IBO_ChooseCategory',
+        component: IBO_ChooseCategory
+    },
+
     // chats
     {
         path: '/chats',
@@ -71,6 +98,21 @@ const routes = [
         path: '/login',
         name: 'Login',
         component: Login
+    },
+    {
+        path: '/forgot-pin',
+        name: 'ForgotPin',
+        component: ForgotPin
+    },
+    {
+        path: '/reset-pin',
+        name: 'ResetPin',
+        component: ResetPin
+    },
+    {
+        path: '/verify-otp',
+        name: 'OTP',
+        component: OTP
     },
 
     
