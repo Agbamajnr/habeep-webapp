@@ -30,7 +30,7 @@
             </div>
 
             <div class="flex flex-row gap-x-10 items-start md:items-center pl-6">
-                <span class="uppercase text-lg text-webapp">BLOG</span>
+                <span class="uppercase text-lg text-webapp cursor-pointer" @click="$router.push('/blog')">BLOG</span>
                 <div class="flex flex-row items-center cursor-pointer gap-x-2" @click="toggleNav">
                     <img src="../assets/icons/user.svg" alt="">
                     <svg xmlns="http://www.w3.org/2000/svg" :class="{'rotate-180': onNavDropdown}" fill="none" viewBox="0 0 24 24" stroke-width="2"
@@ -58,7 +58,7 @@
             <hr class="my-1">
             <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Wallet'}">Wallet</p>
 
-            <div class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300">
+            <div class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300 cursor-pointer" @click="$router.push('/login')">
                 <img src="../assets/icons/logo-mini.svg" alt="">
                 <span class="text-lg text-webapp">Login</span>
                 <span></span>

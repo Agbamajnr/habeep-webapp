@@ -17,6 +17,10 @@ import ChatIndex from '../views/chats/Index.vue'
 import Blog from '../views/extras/BlogRoom.vue'
 import TOS from '../views/extras/TermsOfService.vue'
 
+// auth
+import Register from '../views/Auth/Register.vue'
+import Login from '../views/Auth/Login.vue'
+
 const routes = [
     {
         path: '/',
@@ -57,7 +61,17 @@ const routes = [
         name: 'Chat',
         component: ChatIndex
     },
-
+    // authentication
+    {
+        path: '/register',
+        name: 'Register',
+        component: Register
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login
+    },
 
     
 ]
