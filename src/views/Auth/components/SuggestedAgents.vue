@@ -2,7 +2,7 @@
      <div class="main flex flex-col  md:h-64 fixed md:absolute z-10 overflow-hidden md:right-1/4 md:top-1/3 bg-white">
         <div class="flex flex-row items-center justify-between w-full px-4 py-4 border-b border-b-gray-100">
             <span class="text-lg font-medium text-webapp">Discover agents</span>
-            <img src="../../../assets/icons/x.svg" class="cursor-pointer" @click="$router.push('/login')" alt="">
+            <img src="../../../assets/icons/x.svg" class="cursor-pointer" @click="$emit('close')" alt="">
         </div>
 
         <div class="agents-to-follow flex w-full flex-col h-3/5 overflow-y-auto items-center my-1 px-2">
@@ -27,7 +27,7 @@
             </div>
         </div>
 
-        <button class="bg-primary m-4 rounded-lg grid place-items-center h-14 text-white" @click="$router.push('/profile/jkfffkk')">Continue</button>
+        <button class="bg-primary m-4 rounded-lg grid place-items-center h-14 text-white" @click="$emit('followAgents')">Continue</button>
     </div>
 </template>
   

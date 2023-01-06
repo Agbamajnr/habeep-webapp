@@ -3,7 +3,21 @@ import './assets/css/style.css'
 import './assets/css/tailwind.css'
 import App from './App.vue'
 import router from './router/index.js'
-import './boot/RegisterGlobalComponents'
+import store from './store'
+import Toast from './components/reusables/Toast.vue'
 
-createApp(App).use(router).mount('#app')
+
+import { globalCookiesConfig } from "vue3-cookies";
+globalCookiesConfig({
+    expireTimes: 60 * 60 * 3,
+});
+
+
+const myApp = createApp(App);
+
+myApp.component('Toast', Toast)
+
+myApp.use(router)
+myApp.use(store)
+myApp.mount('#app')
 

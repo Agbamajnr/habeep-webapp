@@ -1,5 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
+import createStore from '../store/index'
+
+function guardMyroute(to, from, next) {
+    var isAuthenticated = false
+    if (createStore.state.isAuthenticated) { isAuthenticated = true } else { isAuthenticated = false }
+    if (isAuthenticated) {
+       if (!createStore.state.user.verified) {
+          next({ name: 'Verify' }) // go to '/verify';
+       }  else next() // allow to enter route
+    } else {
+       next("/login?redirect=" + to.path) // go to '/login';
+    }
+ }
+
 // pages
 import Home from '../views/Home.vue'
 
@@ -67,11 +81,13 @@ const routes = [
     {
         path: '/agents/profile/:id',
         name: 'Agent-profile',
+        beforeEnter: guardMyroute,
         component: AgentProfile
     },
     {
         path: '/user/profile/:id',
         name: 'User-profile',
+        beforeEnter: guardMyroute,
         component: UserProfile
     },
 
@@ -79,6 +95,7 @@ const routes = [
     {
         path: '/account/IBO/category',
         name: 'IBO_ChooseCategory',
+        beforeEnter: guardMyroute,
         component: IBO_ChooseCategory
     },
 
@@ -86,6 +103,7 @@ const routes = [
     {
         path: '/chats',
         name: 'Chat',
+        beforeEnter: guardMyroute,
         component: ChatIndex
     },
     // authentication
