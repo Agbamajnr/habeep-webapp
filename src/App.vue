@@ -41,12 +41,8 @@ const getUser = async () => {
           router.push("/login?redirect=" + router.currentRoute);
         }
       } else {
-        if (store.state._token_.length > 1) {
-          axios.defaults.headers.common = {
-            Authorization: `bearer ${store.state.sessionId}`,
-          };
-        }
         let mutate = {
+          sessionId: store.state.sessionId,
           authState: true,
           userDetails: user.data,
         };
@@ -55,8 +51,8 @@ const getUser = async () => {
     }
   } catch (error) {
     store.dispatch("unsetAuth");
-    if (verifyAllowedRoles(route, 'user')) {
-      router.push("/login?");
+    if (!verifyAllowedRoles(route, 'user')) {
+      router.push("/login");
     }
   }
 };

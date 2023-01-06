@@ -4,7 +4,7 @@
 
     <div class="w-screen min-w-full flex flex-col items-center bg-white h-full min-h-screen overflow-y-auto"
         :class="{ 'max-h-screen overflow-y-hidden': onModal }" resize="changeWidth">
-        <ProfileNavbar  />
+        <ProfileNavbar />
 
 
         <div
@@ -18,18 +18,20 @@
                             <img src="../../../assets/icons/model.svg" class="w-full h-full" alt="">
                         </div>
                         <div class="flex flex-col ">
-                            <span class="text-xl md:text-center text-left agent-name text-webapp font-medium">Duke
-                                Carrick</span>
+                            <span class="text-xl md:text-center text-left agent-name text-webapp font-medium">{{
+                                $store.state.user.surname + ' ' + $store.state.user.fname
+                            }}</span>
                             <p class="text-lg agent-ads-count text-sub-webapp flex flex-row gap-x-2 items-center"><img
-                                    src="../../../assets/images/map-pin.png" alt="">Calabar</p>
+                                    src="../../../assets/images/map-pin.png" alt="">{{ $store.state.user.nationality }}</p>
                         </div>
                     </div>
 
                     <div class="flex flex-row items-center w-full gap-x-4 mt-3">
-                        <p class="text-xl font-webapp font-medium flex flex-row gap-x-1">62<span
+                        <p class="text-xl font-webapp font-medium flex flex-row gap-x-1">0<span
                                 class="text-sub-webapp text-lg">Saved Ads</span></p>
+                                <!-- @click="openModal" -->
                         <p class="text-xl font-webapp font-medium flex flex-row gap-x-1 cursor-pointer"
-                            @click="openModal">4<span class="text-sub-webapp text-lg">Following </span></p>
+                            >0<span class="text-sub-webapp text-lg">Following </span></p>
                     </div>
 
 
@@ -43,8 +45,7 @@
                     </div>
                 </div>
 
-                <div
-                    v-if="screenWidth > 767"
+                <div v-if="screenWidth > 767"
                     class="wallet-info flex py-2 bg-white flex-col border items-start border-gray-300 rounded w-full h-full">
                     <div class="flex flex-row items-center p-2 justify-center w-full border-b border-b-gray-200"><span
                             class="text-webapp text-xl font-medium">Wallet</span></div>
@@ -64,7 +65,7 @@
                     </div>
 
                     <div class="px-20 py-10 w-full">
-                        <Naira v-if="walletTab === 1"/>
+                        <Naira v-if="walletTab === 1" />
                         <HBP v-if="walletTab === 2" />
                     </div>
                 </div>
@@ -73,7 +74,7 @@
 
             <!-- listing -->
 
-            <div class="flex flex-col items-start w-full lg:w-4/5">
+            <div class="flex flex-col min-h-full items-start w-full h-full lg:w-4/5">
                 <div class="flex flex-row gap-x-3 border-b border-b-gray-200 w-full">
                     <div class="cursor-pointer flex flex-row items-center justify-center w-24  pb-1"
                         @click="changeTab(1)" :class="{ 'text-blue-600 border-b-blue-700 border-b-2': openTab === 1 }">
@@ -85,8 +86,12 @@
                     </div>
                 </div>
 
-                <div class="ads-tab w-full h-full mt-6" v-if="(openTab === 1)" id="ads-tab">
-                    <div class="flex flex-row flex-auto h-fit  flex-wrap">
+                <div class="ads-tab w-full  h-full mt-6 flex flex-row items-center justify-center" v-if="(openTab === 1)" id="ads-tab">
+                    <div class="flex flex-col items-center gap-y-3 self-center">
+                        <img src="../../../assets/icons/no-ad.svg" alt="">
+                        <span class="text-gray-300 text-lg">No ads yet</span>
+                    </div>
+                    <div class=" flex-row flex-auto h-fit  flex-wrap hidden">
 
                         <!-- listing template -->
                         <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 6" :key="item">
@@ -119,7 +124,11 @@
                     </div>
                 </div>
                 <div class="saved-ads-tab w-full h-full mt-6" v-if="(openTab === 2)" id="saved-ads-tab">
-                    <div class="flex flex-row flex-auto h-fit  flex-wrap">
+                    <div class="flex flex-col items-center gap-y-3 self-center">
+                        <img src="../../../assets/icons/no-ad.svg" alt="">
+                        <span class="text-gray-300 text-lg">No ads yet</span>
+                    </div>
+                    <div class="flex-row flex-auto h-fit  flex-wrap hidden">
 
                         <!-- listing template -->
                         <div class="md:basis-1/2 xl:basis-1/3 md:px-3 md:py-3 py-5 px-0 " v-for="item in 3" :key="item">

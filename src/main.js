@@ -5,6 +5,7 @@ import App from './App.vue'
 import router from './router/index.js'
 import store from './store'
 import Toast from './components/reusables/Toast.vue'
+import Preloader from './components/reusables/Preloader.vue'
 
 
 import { globalCookiesConfig } from "vue3-cookies";
@@ -16,6 +17,7 @@ globalCookiesConfig({
 const myApp = createApp(App);
 
 myApp.component('Toast', Toast)
+myApp.component('Preloader', Preloader)
 
 myApp.use(router)
 myApp.use(store)

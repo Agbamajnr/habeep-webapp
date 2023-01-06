@@ -42,10 +42,8 @@ let props = defineProps({
     msg : String,
     type : String,
 })
-
-console.log(props)
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -19,7 +19,7 @@
               d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
 
-          <input type="text" v-model="data.input" class="w-full h-full" placeholder="Search by property type, location, price">
+          <input type="text" v-model="data.input" class=" rounded-sm w-full h-full outline-none" placeholder="Search by property type, location, price">
         </div>
         <!-- search results -->
         <div class="flex flex-col gap-y-4 search-results relative sm:absolute bg-white z-10 w-full py-5 px-3 top-12 md:top-20" v-if="(data.input.length > 0)">
@@ -103,7 +103,8 @@ input::placeholder {
   font-size: 16px;
 }
 input {
-  outline: none;
+  outline: none !important;
+  border: none !important;
 }
 
 @media screen and (max-width: 768px) {

@@ -10,7 +10,7 @@ export default createStore({
   mutations: {
     setAuthState(state, data) {
         state.isAuthenticated = data.authState;
-        state.sessionId = data.token;
+        state.sessionId = data.sessionId;
         state.user = data.userDetails
     },
     setUserProfile(state, data) {

@@ -51,16 +51,21 @@
             class="flex flex-col drop-shadow-lg shadow-xl bg-white rounded-xl gap-y-3 border p-6 border-gray-300 absolute top-16 right-20 z-10"
             style="width: 250px">
 
-            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Home'}">Home</p>
-            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Listings-search'}">Search</p>
-            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Messages'}">Message</p>
-            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Account'}">Account</p>
+            <p @click="$router.push('/')" class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Home'}">Home</p>
+            <p @click="$router.push('/listings/search')" class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Listings-search'}">Search</p>
+            <p @click="$router.push('chat')" class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Chat'}" v-if="$store.state.isAuthenticated">Message</p>
+            <p @click="$router.push('/user/profile/' + $store.state.user._id)" class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'User-profile'}" v-if="$store.state.isAuthenticated">Account</p>
             <hr class="my-1">
-            <p class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Wallet'}">Wallet</p>
+            <p @click="$router.push('/wallet')" class="text-sm text-webapp mt-1 cursor-pointer" :class="{'text-primary': $route.name === 'Wallet'}" v-if="$store.state.isAuthenticated">Wallet</p>
 
-            <div class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300 cursor-pointer" @click="$router.push('/login')">
+            <div v-if="!$store.state.isAuthenticated" class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300 cursor-pointer" @click="$router.push('/login')">
                 <img src="../assets/icons/logo-mini.svg" alt="">
                 <span class="text-lg text-webapp">Login</span>
+                <span></span>
+            </div>
+            <div v-else class="flex flex-row items-center justify-between w-full rounded-full p-2 mt-8 border border-gray-300 cursor-pointer" @click="$router.push('/logout')">
+                <img src="../assets/icons/logo-mini.svg" alt="">
+                <span class="text-lg text-webapp">Logout</span>
                 <span></span>
             </div>
 

@@ -14,19 +14,21 @@ const validateEmail = (userEmail) => {
 
 
 
-export function loginValidate(email, password) {
+export function loginValidate(email, pin) {
     let verif = validateEmail(email);
     if (!verif) {
         return {
             success: false,
             message: 'Please enter a valid email address',
+            field: 'email',
         }
     } else {
-        const noWhitespace = password.toString().replace(/\s/g, '');
-        if (noWhitespace.length < 6) {
+        const noWhitespace = pin.toString().replace(/\s/g, '');
+        if (noWhitespace.length < 4 ) {
             return {
                 success: false,
                 message: 'Password length must be at least 6 characters',
+                field: 'pin',
             }
         } else {
             return {
