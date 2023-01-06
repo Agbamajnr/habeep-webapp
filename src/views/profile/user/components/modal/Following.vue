@@ -22,7 +22,7 @@
             :key="item">
             <div class="flex flex-row gap-x-2 items-center">
                 <div class="rounded-full w-10 h-10 grid place-items-center">
-                    <img src="../../../../assets/icons/model.svg" class="w-full h-full" alt="">
+                    <img src="../../../../../assets/icons/model.svg" class="w-full h-full" alt="">
                 </div>
                 <div class="flex flex-col ">
                     <span
